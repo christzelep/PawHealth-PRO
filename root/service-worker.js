@@ -1,28 +1,21 @@
-// service-worker.js - Αλλαγή 6: Βελτιωμένος service worker
-const CACHE_NAME = 'pawhealth-v2';
+const CACHE_NAME = 'dogtrainpro-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
+      .then(cache => cache.addAll(urlsToCache))
 });
 
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request);
-      })
+      .then(response => response || fetch(event.request))
   );
 });
 
@@ -39,15 +32,4 @@ self.addEventListener('activate', event => {
       );
     })
   );
-});
-
-// Offline page support
-self.addEventListener('fetch', event => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match('offline.html');
-      })
-    );
-  }
 });
