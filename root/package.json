@@ -1,0 +1,11 @@
+{
+  "name": "pawhealth-pro",
+  "version": "1.0.0",
+  "description": "Professional pawhealth tool",
+  "scripts": {
+    "start": "serve -s"
+  },
+  "dependencies": {
+    "serve": "^14.0.1"
+  }
+}
